@@ -13,10 +13,21 @@ app.locals.notes = [
       { 
         item: 'Create a new note',
         completed: false,
-        id: 2222222222222 
+        id: 22
       }
     ],
-    id: 1111111111111
+    id: 11
+  },
+  { 
+    title: 'This is another note', 
+    list: [
+      { 
+        item: 'Create another note',
+        completed: false,
+        id: 23
+      }
+    ],
+    id: 12
   }
 ]
 
@@ -35,6 +46,16 @@ app.post('/api/v1/notes', (request, response) => {
 
   app.locals.notes.push(newNote);
   response.status(201).json(newNote);
+});
+
+app.get('/api/v1/notes/:id', (request, response) => {
+  const note = app.locals.notes.find(note => note.id == request.params.id);
+
+  if (!note) {
+    return response.status(404).json('Note not found');
+  } else {
+    return response.status(200).json(note);
+  }
 });
 
 module.exports = app;
