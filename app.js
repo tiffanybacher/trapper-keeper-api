@@ -58,4 +58,16 @@ app.get('/api/v1/notes/:id', (request, response) => {
   }
 });
 
+app.delete('/api/v1/notes/:id', (request, response) => {
+  const noteIndex = app.locals.notes.findIndex(note => note.id == request.params.id);
+
+  if (noteIndex === -1) {
+    return response.status(404).json('Note not found');
+  } else {
+    app.locals.notes.splice(noteIndex, 1);
+
+    return response.sendStatus(204);
+  }
+});
+
 module.exports = app;
