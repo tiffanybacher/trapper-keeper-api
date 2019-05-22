@@ -19,7 +19,7 @@ app.locals.notes = [
 
 app.use(express.json());
 
-app.get('/', (request, response) => {
+app.get('/api/v1/notes', (request, response) => {
   return response.status(200).json(app.locals.notes);
 });
 
