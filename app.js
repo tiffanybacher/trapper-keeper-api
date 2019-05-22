@@ -70,4 +70,36 @@ app.delete('/api/v1/notes/:id', (request, response) => {
   }
 });
 
+app.put('/api/v1/notes/:id', (request, response) => {
+  const { title, list } = request.body;
+  let { id } = request.params;
+  id = parseInt(id);
+  let noteWasFound = false;
+  const newNotes = app.locals.notes.map(note => {
+    if (note.id == id) {
+      noteWasFound = true;
+      return { title, list, id }
+    } else {
+      return note
+    }
+  });
+
+  if (!title || !list) {
+    return response.status(422).json('Please provide a title and a list item');
+  }
+
+  if (!noteWasFound) {
+    return response.status(404).json('Note not found');
+  }
+
+  app.locals.notes = newNotes
+
+  return response.sendStatus(204);
+});
+
 module.exports = app;
+
+
+
+
+
