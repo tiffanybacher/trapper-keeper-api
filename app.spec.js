@@ -107,20 +107,25 @@ describe('API', () => {
      });
   });
 
-  // describe('DELETE/api/v1/notes', () => {
-  //   let notes;
+  describe('DELETE/api/v1/notes', () => {
+    let notes;
 
-  //   beforeEach(() => {
-  //     notes = [ 
-  //       { title: 'Note', list: [], id: 1 },
-  //       { title: 'Another note', list: [], id: 2}
-  //     ]
-  //     app.locals.notes = notes
-  //   })
-  //   it('should return 204 if delete was accepted', () => {
-
-  //   })
-  // })
+    beforeEach(() => {
+      notes = [ 
+        { title: 'Note', list: [], id: 1 },
+        { title: 'Another note', list: [], id: 2}
+      ]
+      app.locals.notes = notes
+    })
+    it('should return 204 if delete was accepted', async () => {
+      const response = await request(app).delete('/api/v1/notes/1');
+      expect(response.statusCode).toBe(204)
+    })
+    it('should return 404 if delete was not accepted', async () => {
+      const response = await request(app).delete('/api/v1/notes/12');
+      expect(response.statusCode).toBe(404)
+    })
+  })
 
   describe('PUT /api/v1/notes', () => {
     let notes;
