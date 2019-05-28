@@ -36,7 +36,8 @@ app.locals.notes = [
         id: 5
       }
     ],
-    id: Date.now()
+    id: Date.now(),
+    background:'#FFF'
   }
 ]
 
@@ -80,14 +81,14 @@ app.delete('/api/v1/notes/:id', (request, response) => {
 });
 
 app.put('/api/v1/notes/:id', (request, response) => {
-  const { title, list } = request.body;
+  const { title, list, background } = request.body;
   let { id } = request.params;
   id = parseInt(id);
   let noteWasFound = false;
   const newNotes = app.locals.notes.map(note => {
     if (note.id == id) {
       noteWasFound = true;
-      return { title, list, id }
+      return { title, list, id, background }
     } else {
       return note
     }
