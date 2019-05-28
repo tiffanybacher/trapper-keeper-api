@@ -8,26 +8,35 @@ app.use(express.json());
 
 app.locals.notes = [
   { 
-    title: 'This is a note', 
+    title: 'What you can do with Trapper Keeper', 
     list: [
       { 
         item: 'Create a new note',
         completed: false,
-        id: 22
-      }
-    ],
-    id: 11
-  },
-  { 
-    title: 'This is another note', 
-    list: [
+        id: 1
+      },
       { 
-        item: 'Create another note',
+        item: 'Add list items to your note',
         completed: false,
-        id: 23
+        id: 2
+      },
+      { 
+        item: 'Edit or delete items on your note',
+        completed: false,
+        id: 3
+      },
+      { 
+        item: 'Delete your note',
+        completed: false,
+        id: 4
+      },
+      { 
+        item: 'View completed items',
+        completed: true,
+        id: 5
       }
     ],
-    id: 12
+    id: Date.now()
   }
 ]
 
@@ -98,8 +107,3 @@ app.put('/api/v1/notes/:id', (request, response) => {
 });
 
 module.exports = app;
-
-
-
-
-
